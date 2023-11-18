@@ -44,5 +44,15 @@ public class ToDoListController {
         return new ResponseEntity(toDoListOptional, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ToDoList> deleteTaskById(@PathVariable (value = "id") Long id) throws Exception {
+
+        Optional<ToDoList> toDoListOptional = toDoListService.findById(id);
+
+        this.toDoListService.delete(toDoListOptional.get());
+
+        return new ResponseEntity(toDoListOptional, HttpStatus.OK);
+    }
+
 
 }

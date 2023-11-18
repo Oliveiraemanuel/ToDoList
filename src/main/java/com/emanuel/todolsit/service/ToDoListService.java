@@ -43,4 +43,9 @@ public class ToDoListService {
     public Optional<ToDoList> findById(Long id) throws Exception {
         return Optional.ofNullable(this.toDoListRepository.findById(id).orElseThrow(() -> new Exception("Id não encontrado")));
     }
+
+    @Transactional
+    public void delete(ToDoList toDoList){
+        this.toDoListRepository.delete(toDoList);
+    }
 }
