@@ -20,7 +20,7 @@ public class ToDoListService {
     }
 
     public ToDoList createTask(ToDoListDTO data){
-        ToDoList newTask = new ToDoList();
+        ToDoList newTask = new ToDoList(data);
         this.saveTask(newTask);
         return newTask;
     }
