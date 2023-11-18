@@ -4,6 +4,8 @@ import com.emanuel.todolsit.dto.ToDoListDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tasks")
 @Getter
@@ -22,6 +24,8 @@ public class ToDoList {
     private String descricao;
 
     private Integer prazo;
+
+    private LocalDateTime deadLine;
 
     public ToDoList(ToDoListDTO data) {
         this.tarefa = data.tarefa();

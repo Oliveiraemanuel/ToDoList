@@ -20,7 +20,9 @@ public class ToDoListController {
 
     @PostMapping
     public ResponseEntity<ToDoList> createTask(@RequestBody ToDoListDTO data){
-        ToDoList newTask = this.toDoListService.createTask(data);
+
+        ToDoList newTask = new ToDoList();
+        newTask = this.toDoListService.createTask(data);
         return new ResponseEntity<>(newTask, HttpStatus.OK);
     }
 }
