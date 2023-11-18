@@ -4,7 +4,6 @@ import com.emanuel.todolsit.domains.ToDoList;
 import com.emanuel.todolsit.dto.ToDoListDTO;
 import com.emanuel.todolsit.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -52,6 +52,22 @@ public class ToDoListController {
         this.toDoListService.delete(toDoListOptional.get());
 
         return new ResponseEntity(toDoListOptional, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ToDoList> updateTask(@PathVariable (value = "id") Long id,
+                                               @RequestBody ToDoListDTO data) throws Exception {
+
+        Optional<ToDoList> taskOptional = toDoListService.findById(id);
+
+        ToDoList task = new ToDoList();
+        task.setId(taskOptional.get().getId());
+        task.setTarefa(data.tarefa());
+        task.setDescricao(data.descricao());
+        task.setPrazo(data.prazo());
+        task.setDeadLine(LocalDateTime.now().plusDays(task.getPrazo()));
+
+        return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
 
