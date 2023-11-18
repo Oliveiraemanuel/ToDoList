@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class ToDoListService {
@@ -37,5 +38,9 @@ public class ToDoListService {
 
     public Page<ToDoList> findAllTasks(Pageable pageable){
         return this.toDoListRepository.findAll(pageable);
+    }
+
+    public Optional<ToDoList> findById(Long id) throws Exception {
+        return Optional.ofNullable(this.toDoListRepository.findById(id).orElseThrow(() -> new Exception("Id não encontrado")));
     }
 }
