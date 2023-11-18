@@ -5,6 +5,8 @@ import com.emanuel.todolsit.dto.ToDoListDTO;
 import com.emanuel.todolsit.repository.ToDoListRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,5 +33,9 @@ public class ToDoListService {
         this.saveTask(newTask);
 
         return newTask;
+    }
+
+    public Page<ToDoList> findAllTasks(Pageable pageable){
+        return this.toDoListRepository.findAll(pageable);
     }
 }
