@@ -1,5 +1,6 @@
 package com.emanuel.todolsit.domains;
 
+import com.emanuel.todolsit.dto.ToDoListDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +22,10 @@ public class ToDoList {
     private String descricao;
 
     private Integer prazo;
+
+    public ToDoList(ToDoListDTO data) {
+        this.tarefa = data.tarefa();
+        this.descricao = data.descricao();
+        this.prazo = data.prazo();
+    }
 }
