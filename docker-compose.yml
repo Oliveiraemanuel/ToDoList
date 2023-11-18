@@ -1,0 +1,13 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: todolist_container
+    environment:
+      POSTGRES_DB: todolist_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: senha
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/to/local/data:/var/lib/postgresql/data
